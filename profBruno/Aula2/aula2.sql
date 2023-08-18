@@ -45,5 +45,13 @@ insert into pedido (id_pedido, id_produto, quantidade) values
 
 select * from pedido;
 
-select nome,preco from produtos inner join pedido on 
-pedido.id_produto=produtos.id_produtos where id_pedido=1;
+select id_produto, nome, preco, quantidade from produtos inner join pedido on 
+pedido.id_produto=produtos.id_produtos where id_pedido=4;
+
+/*
+difinir uma alias caso de ambiguidade
+
+select id_produto, p.nome, p.preco, p.quantidade from produtos as p inner join pedido as d on 
+d.id_produto=p.id_produtos where id_pedido=4;
+
+*/
