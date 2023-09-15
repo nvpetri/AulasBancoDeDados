@@ -82,3 +82,15 @@ insert into estoque (id_veiculos, quantidade_estoque) values
 (3, 500);
 
 select * from estoque;
+
+select id_cliente, data_compra, total_compra, nome_cliente from compras, clientes where id_cliente=1;
+
+select c.nome_veiculos, cp.data_compra from carros as c inner join compras as cp on cp.id_veiculos=c.id_veiculos where data_compra = "08/09/2022";
+
+select nome_cliente from clientes ;
+
+select p.nome_cliente, d.data_compra, d.total_compra from clientes as p inner join compras as d on d.id_cliente=p.id_cliente where nome_cliente = "Raica Martinez";
+
+select sum(quantidade_estoque) from carros;
+
+select max(subtotal_compra) from carros_compra
