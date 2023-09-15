@@ -97,4 +97,16 @@ select max(subtotal_compra) from carros_compra;
 
 select nome_veiculos from carros where preco between 1100000 and 1500000;
 
-select * from carros where nome_veiculos like "BMW%"
+select * from carros where nome_veiculos like "BMW%";
+
+SELECT * FROM carros WHERE categoria = 'Esportivo' AND preco < 50000;
+
+SELECT * FROM carros WHERE categoria = 'Hibrido' OR preco > 60000;
+
+SELECT * FROM carros WHERE NOT categoria = 'Esportivo';
+
+SELECT * FROM carros WHERE descricao_veiculos IS NULL;
+
+SELECT * FROM carros WHERE descricao_veiculos IS NOT NULL;
+
+SELECT * FROM Carros WHERE Categoria IN ('Esportivo', 'Hibrido');
