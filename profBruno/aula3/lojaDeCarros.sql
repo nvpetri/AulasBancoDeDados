@@ -89,7 +89,9 @@ select c.nome_veiculos, cp.data_compra from carros as c inner join compras as cp
 
 select nome_cliente from clientes ;
 
-select p.nome_cliente, d.data_compra, d.total_compra from clientes as p inner join compras as d on d.id_cliente=p.id_cliente where nome_cliente = "Raica Martinez";
+select p.nome_cliente, d.data_compra, d.total_compra from clientes as p 
+inner join compras as d on d.id_cliente=p.id_cliente 
+where nome_cliente = "Raica Martinez";
 
 select sum(quantidade_estoque) from carros;
 

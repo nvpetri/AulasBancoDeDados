@@ -108,4 +108,6 @@ VALUES
  (5, 5, 102, '2023-03-15', 'presente'),
  (6, 6, 102, '2023-03-15', 'presente');
 
+show tables;
 
+select professores.nome from professores inner join turmas on professores_id=id_professor where disciplinas.nome_disciplina = "BD201";
