@@ -48,7 +48,7 @@ create table presenca(
     id_aluno int,
     id_turma int,
     data_aula date,
-    presenca varchar(5),
+    presenca varchar(15),
     
     foreign key (id_aluno) references alunos (id_aluno),
     foreign key (id_turma) references turmas (turma_id)
@@ -98,5 +98,14 @@ VALUES
  (4, 4, 2, '2023-03-15', 88),
  (5, 5, 2, '2023-03-15', 95),
  (6, 6, 2, '2023-03-15', 75);
+ 
+INSERT INTO presenca (id_presenca, id_aluno, id_turma, data_aula, presenca)
+VALUES
+ (1, 1, 101, '2023-03-10', 'presente'),
+ (2, 2, 101, '2023-03-10', 'presente'),
+ (3, 3, 101, '2023-03-10', 'presente'),
+ (4, 4, 102, '2023-03-15', 'ausente'),
+ (5, 5, 102, '2023-03-15', 'presente'),
+ (6, 6, 102, '2023-03-15', 'presente');
 
 
