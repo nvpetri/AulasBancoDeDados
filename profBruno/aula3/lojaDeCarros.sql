@@ -93,4 +93,8 @@ select p.nome_cliente, d.data_compra, d.total_compra from clientes as p inner jo
 
 select sum(quantidade_estoque) from carros;
 
-select max(subtotal_compra) from carros_compra
+select max(subtotal_compra) from carros_compra;
+
+select nome_veiculos from carros where preco between 1100000 and 1500000;
+
+select * from carros where nome_veiculos like "BMW%"
