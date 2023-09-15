@@ -3,20 +3,20 @@ create schema escola_sql_nicolas;
 use escola_sql_nicolas;
 
 create table alunos (
-	id_aluno integer primary key not null,
+	aluno_id integer primary key not null,
     nome varchar(255),
-    data_de_nascimento date,
-    endereco_aluno varchar(255),
-    tel_aluno varchar(20)
+    data_nascimento date,
+    endereco varchar(255),
+    telefone varchar(20)
 );
 create table professores (
-	id_professor integer primary key not null,
+	professor_id integer primary key not null,
     nome varchar(255),
-    data_de_contratacao date
+    data_contratacao date
 );
 
 create table disciplinas (
-	id_disciplinas integer primary key not null,
+	disciplina_id integer primary key not null,
     nome_disciplina varchar(100),
     codigo_disciplina varchar(20),
     carga_horaria int
@@ -25,36 +25,36 @@ create table disciplinas (
 create table turmas(
 	turma_id integer primary key not null,
     ano_escolar int,
-    id_disciplinas int,
-    professores_id int,
+    disciplina_id int,
+    professor_id int,
     
-    foreign key (id_disciplinas) references disciplinas (id_disciplinas),
-    foreign key (professores_id) references professores (id_professor)
+    foreign key (disciplina_id) references disciplinas (disciplina_id),
+    foreign key (professor_id) references professores (professor_id)
 );
 
 create table notas (
-	id_nota int primary key,
-    id_aluno int,
-    id_disciplinas int,
+	nota_id int primary key,
+    aluno_id int,
+    disciplina_id int,
     data_avaliacao date,
     nota float,
     
-    foreign key (id_aluno) references alunos (id_aluno),
-    foreign key (id_disciplinas) references disciplinas (id_disciplinas)
+    foreign key (aluno_id) references alunos (aluno_id),
+    foreign key (disciplina_id) references disciplinas (disciplina_id)
 );
 
 create table presenca(
-	id_presenca int primary key not null,
-    id_aluno int,
-    id_turma int,
+	presenca_id int primary key not null,
+    aluno_id int,
+    turma_id int,
     data_aula date,
     presenca varchar(15),
     
-    foreign key (id_aluno) references alunos (id_aluno),
-    foreign key (id_turma) references turmas (turma_id)
+    foreign key (aluno_id) references alunos (aluno_id),
+    foreign key (turma_id) references turmas (turma_id)
 );
 
-INSERT INTO alunos (id_aluno, nome, data_de_nascimento, endereco_aluno, tel_aluno)
+INSERT INTO alunos (aluno_id, nome, data_nascimento, endereco, telefone)
 VALUES
  (1, 'João Silva', '1995-03-15', 'Rua A, 123', '(11) 1234-5678'),
  (2, 'Maria Santos', '1998-06-22', 'Av. B, 456', '(11) 9876-5432'),
@@ -63,7 +63,7 @@ VALUES
  (5, 'Pedro Rodrigues', '1996-07-18', 'Rua E, 654', '(11) 3456-7890'),
  (6, 'Sara Costa', '2000-04-30', 'Av. F, 321', '(11) 8765-4321');
  
- INSERT INTO professores (id_professor, nome, data_de_contratacao)
+INSERT INTO professores (professor_id, nome, data_contratacao)
 VALUES
  (1, 'Ana Lima', '2010-08-15'),
  (2, 'José Santos', '2005-04-20'),
@@ -71,8 +71,8 @@ VALUES
  (4, 'Cláudia Pereira', '2014-03-25'),
  (5, 'Fernanda Rodrigues', '2018-09-08'),
  (6, 'Ricardo Costa', '2019-12-01');
- 
- INSERT INTO disciplinas (id_disciplinas, nome_disciplina, codigo_disciplina, carga_horaria)
+
+INSERT INTO disciplinas (disciplina_id, nome_disciplina, codigo_disciplina, carga_horaria)
 VALUES
  (1, 'Programação em C', 'PC101', 60),
  (2, 'Banco de Dados', 'BD201', 45),
@@ -80,8 +80,8 @@ VALUES
  (4, 'Algoritmos Avançados', 'AA401', 60),
  (5, 'Inteligência Artificial', 'IA501', 90),
  (6, 'Segurança da Informação', 'SI601', 45);
- 
- INSERT INTO turmas (turma_id, ano_escolar, id_disciplinas, professores_id)
+
+INSERT INTO turmas (turma_id, ano_escolar, disciplina_id, professor_id)
 VALUES
  (101, 2023, 1, 1),
  (102, 2023, 2, 2),
@@ -90,7 +90,7 @@ VALUES
  (105, 2023, 5, 5),
  (106, 2023, 6, 6);
  
- INSERT INTO notas (id_nota, id_aluno, id_disciplinas, data_avaliacao, nota)
+ INSERT INTO notas (nota_id, aluno_id, disciplina_id, data_avaliacao, nota)
 VALUES
  (1, 1, 1, '2023-03-10', 85),
  (2, 2, 1, '2023-03-10', 78),
@@ -99,7 +99,7 @@ VALUES
  (5, 5, 2, '2023-03-15', 95),
  (6, 6, 2, '2023-03-15', 75);
  
-INSERT INTO presenca (id_presenca, id_aluno, id_turma, data_aula, presenca)
+ INSERT INTO presenca (presenca_id, aluno_id, turma_id, data_aula, presenca)
 VALUES
  (1, 1, 101, '2023-03-10', 'presente'),
  (2, 2, 101, '2023-03-10', 'presente'),
@@ -110,4 +110,7 @@ VALUES
 
 show tables;
 
-select professores.nome from professores inner join turmas on professores_id=id_professor where disciplinas.nome_disciplina = "BD201";
+select professores.nome from turmas
+inner join disciplinas on turmas.disciplina_id=disciplinas.disciplina_id 
+inner join professores on turmas.professor_id=professores.professor_id
+where disciplinas.codigo_disciplina= "BD201";
