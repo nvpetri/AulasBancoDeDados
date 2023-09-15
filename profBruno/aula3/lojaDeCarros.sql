@@ -95,7 +95,7 @@ select sum(quantidade_estoque) from carros;
 
 select max(subtotal_compra) from carros_compra;
 
-select nome_veiculos, preco from carros where preco between 11000 and 1700000;
+select nome_veiculos, preco from carros where preco between 110 and 1700000;
 
 select * from carros where nome_veiculos like "BMW%";
 
@@ -110,4 +110,3 @@ SELECT * FROM carros WHERE descricao_veiculos IS NULL;
 SELECT * FROM carros WHERE descricao_veiculos IS NOT NULL;
 
 SELECT * FROM carros WHERE categoria IN ('Esportivo', 'Hibrido');
-
