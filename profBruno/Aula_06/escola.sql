@@ -121,8 +121,8 @@ inner join disciplinas on notas.disciplina_id=disciplinas.disciplina_id
 where codigo_disciplina="PC101" and notas.nota > 80;
 
 select avg(notas.nota) from notas
-inner join disciplinas on notas.disciplina_id=disciplina_id
-where disciplinas.codigo_disciplina="IA501"
+inner join disciplinas on notas.disciplina_id=notas.disciplina_id
+where disciplinas.codigo_disciplina="IA501";
 
 select alunos.nome from alunos
 inner join presenca on alunos.aluno_id=presenca.aluno_id
@@ -176,9 +176,10 @@ select alunos.nome from alunos
 inner join presenca on alunos.aluno_id=presenca.aluno_id
 where not presenca.presenca = "presente";
 
-select d.nome_disciplina, d.codigo_disciplina, min(nota) as min_nota from disciplinas as d
-inner join notas as n on d.disciplina_id=n.disciplina_id
-group by d.nome_disciplina, d.codigo_disciplina having min_nota >=70;
+select d.nome_disciplina, d.codigo_disciplina, n.nota from disciplinas as d
+right join notas as n on d.disciplina_id=n.disciplina_id
+group by d.nome_disciplina, d.codigo_disciplina, nota having nota >=70;
+
 
 select a.nome from alunos as a
 inner join notas as n on a.aluno_id=n.aluno_id
