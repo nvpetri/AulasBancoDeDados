@@ -114,3 +114,90 @@ select professores.nome from turmas
 inner join disciplinas on turmas.disciplina_id=disciplinas.disciplina_id 
 inner join professores on turmas.professor_id=professores.professor_id
 where disciplinas.codigo_disciplina= "BD201";
+
+select alunos.nome from alunos
+inner join notas on alunos.aluno_id=notas.aluno_id
+inner join disciplinas on notas.disciplina_id=disciplinas.disciplina_id
+where codigo_disciplina="PC101" and notas.nota > 80;
+
+select avg(notas.nota) from notas
+inner join disciplinas on notas.disciplina_id=disciplina_id
+where disciplinas.codigo_disciplina="IA501"
+
+select alunos.nome from alunos
+inner join presenca on alunos.aluno_id=presenca.aluno_id
+inner join turmas on presenca.turma_id=turmas.turma_id
+where turmas.turma_id=101 and presenca.data_aula="2023-03-10";
+
+select alunos.nome, disciplinas.nome_disciplina from alunos
+left join notas on alunos.aluno_id=notas.aluno_id
+left join disciplinas on notas.disciplina_id=disciplinas.disciplina_id;
+
+select nome_disciplina from disciplinas
+where carga_horaria < 40 or carga_horaria > 100;
+
+select alunos.nome from alunos
+inner join notas on alunos.aluno_id=notas.aluno_id
+where notas.nota is null;
+
+select turmas.ano_escolar from turmas
+inner join professores on turmas.professor_id=professores.professor_id
+where professores.professor_id is null;
+
+select avg(notas.nota) as media from notas 
+inner join disciplinas on notas.disciplina_id=disciplinas.disciplina_id
+where disciplinas.codigo_disciplina="DW301" and data_avaliacao between "2023-03-01" and '2023-03-31';
+
+select disciplinas.nome_disciplina, disciplinas.codigo_disciplina from disciplinas
+left join notas on disciplinas.disciplina_id=notas.disciplina_id
+left join alunos on notas.aluno_id=alunos.aluno_id
+where notas.nota < 60;
+
+select professores.nome from professores
+inner join turmas on professores.professor_id=turmas.professor_id
+inner join disciplinas on turmas.disciplina_id=disciplinas.disciplina_id
+where not disciplinas.codigo_disciplina = "IA501";
+
+select COUNT(alunos.aluno_id) as contagem, alunos.nome from alunos
+inner join notas on alunos.aluno_id=notas.aluno_id
+inner join disciplinas on notas.disciplina_id=disciplinas.disciplina_id
+group by alunos.nome having contagem > 1;
+
+select ano_escolar from turmas
+inner join presenca on turmas.turma_id=presenca.turma_id
+where presenca.presenca = "ausente";
+
+select professores.nome from professores
+inner join turmas on professores.professor_id=turmas.professor_id
+inner join disciplinas on turmas.disciplina_id=disciplinas.disciplina_id
+where codigo_disciplina="PC101" OR codigo_disciplina="BD201";
+
+select alunos.nome from alunos
+inner join presenca on alunos.aluno_id=presenca.aluno_id
+where not presenca.presenca = "presente";
+
+select d.nome_disciplina, d.codigo_disciplina, min(nota) as min_nota from disciplinas as d
+inner join notas as n on d.disciplina_id=n.disciplina_id
+group by d.nome_disciplina, d.codigo_disciplina having min_nota >=70;
+
+select a.nome from alunos as a
+inner join notas as n on a.aluno_id=n.aluno_id
+inner join disciplinas as d on n.disciplina_id=d.disciplina_id
+where codigo_disciplina="IA501" and n.nota between 80 and 90
+or  codigo_disciplina="DW301" and n.nota between 80 and 90;
+
+select p.nome from professores as p
+inner join turmas as t on p.professor_id=t.professor_id
+inner join disciplinas as d on t.disciplina_id=d.disciplina_id
+where d.carga_horaria > 60;
+
+select pre.data_aula from presenca as pre
+inner join turmas as t on pre.presenca_id=t.turma_id
+inner join disciplinas as d on t.disciplina_id=d.disciplina_id
+where d.codigo_disciplina="AA401" 
+and data_aula between '2023-04-01' and '2023-04-30'
+and pre.presenca = "ausente";
+
+select a.nome from alunos as a
+inner join presenca as p on a.aluno_id=p.aluno_id
+where not p.presenca="ausente";
